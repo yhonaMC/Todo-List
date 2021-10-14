@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styleTodo.css";
 import ModalTarea from "../Modal/Modal";
+import Cards from "../Cards/Cards";
 
 const TodoList = () => {
   const [modal, setModal] = useState(false);
@@ -11,9 +12,26 @@ const TodoList = () => {
   const guardarTarea = (tareasObj) => {
     let list = taskList;
     list.push(tareasObj);
+    localStorage.setItem("listaTareas", JSON.stringify(list));
     setTaskList(list);
     setModal(false);
   };
+
+  const eliminarTarea = (index) => {
+    let eliminar = taskList;
+    eliminar.splice(index, 1);
+    localStorage.setItem("listaTareas", JSON.stringify(eliminar));
+    setTaskList(eliminar);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    let arr = localStorage.getItem("listaTareas");
+    if (arr) {
+      let obj = JSON.parse(arr);
+      setTaskList(obj);
+    }
+  }, []);
 
   return (
     <>
@@ -24,8 +42,13 @@ const TodoList = () => {
         </button>
       </div>
       <div className="task-container">
-        {taskList.map((obj) => (
-          <li>{obj.Name}</li>
+        {taskList.map((obj, index) => (
+          <Cards
+            key={obj.id}
+            list={obj}
+            index={index}
+            eliminarTarea={eliminarTarea}
+          />
         ))}
       </div>
       <ModalTarea toggle={toggle} modal={modal} guardarTarea={guardarTarea} />

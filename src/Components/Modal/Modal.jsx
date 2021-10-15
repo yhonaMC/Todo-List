@@ -53,7 +53,7 @@ const ModalTarea = ({ modal, toggle, guardarTarea }) => {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleguardar}>
+          <Button onClick={handleguardar} className="color">
             Guardar
           </Button>{" "}
           <Button color="secondary" onClick={toggle}>

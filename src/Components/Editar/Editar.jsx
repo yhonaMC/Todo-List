@@ -59,7 +59,7 @@ const Editar = ({ modal, toggle, editarTarea, list }) => {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleEditar}>
+          <Button onClick={handleEditar} className="color">
             Editar
           </Button>{" "}
           <Button color="secondary" onClick={toggle}>

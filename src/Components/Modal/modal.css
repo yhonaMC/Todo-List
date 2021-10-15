@@ -2,3 +2,10 @@
 .size {
   resize: none;
 }
+
+.color {
+  background-color: #e6874e !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}

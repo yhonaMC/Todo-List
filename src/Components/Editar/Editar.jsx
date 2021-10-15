@@ -21,8 +21,8 @@ const Editar = ({ modal, toggle, editarTarea, list }) => {
     let taskObj = {};
     taskObj["Name"] = taskname;
     taskObj["Descripcion"] = descripcion;
-    taskObj["Homework"] = false;
     editarTarea(taskObj);
+    toggle();
   };
 
   useEffect(() => {

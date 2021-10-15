@@ -20,7 +20,7 @@ const ModalTarea = ({ modal, toggle, guardarTarea }) => {
     let taskObj = {};
     taskObj["Name"] = taskname;
     taskObj["Descripcion"] = descripcion;
-    taskObj["Homework"] = false;
+    taskObj["Homework"] = true;
     guardarTarea(taskObj);
   };
 

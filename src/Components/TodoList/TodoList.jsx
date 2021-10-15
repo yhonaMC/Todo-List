@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./styleTodo.css";
 import ModalTarea from "../Modal/Modal";
 import Cards from "../Cards/Cards";
-import { Input } from "reactstrap";
 
 const TodoList = () => {
   const [modal, setModal] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [busqueda, setbusqueda] = useState("");
+  const [render, setRender] = useState(true);
 
   const toggle = () => setModal(!modal);
 
@@ -24,7 +24,7 @@ const TodoList = () => {
     list[index] = obj;
     localStorage.setItem("listaTareas", JSON.stringify(list));
     setTaskList(list);
-    window.location.reload();
+    setRender(!render);
   };
 
   const eliminarTarea = (index) => {
@@ -32,7 +32,7 @@ const TodoList = () => {
     eliminar.splice(index, 1);
     localStorage.setItem("listaTareas", JSON.stringify(eliminar));
     setTaskList(eliminar);
-    window.location.reload();
+    setRender(!render);
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const TodoList = () => {
         obj.filter((res) => res.Descripcion.toLowerCase().includes(busqueda))
       );
     }
-  }, [busqueda]);
+  }, [busqueda, render]);
 
   const handleFiltro = (e) => {
     setbusqueda(e.target.value);
@@ -52,11 +52,23 @@ const TodoList = () => {
   return (
     <>
       <div className="header text-center">
-        <h3>Todo List</h3>
-        <button className="btn btn-primary mt-3" onClick={() => setModal(true)}>
+        <h3 className="primaryTitle">Todo List</h3>
+
+        <button
+          className="btn btn-primary crear mt-2"
+          onClick={() => setModal(true)}
+        >
           Crear nueva Tarea
         </button>
-        <input type="text" placeholder="Buscar" onChange={handleFiltro} />
+
+        <div className="mt-3">
+          <input
+            type="text"
+            placeholder="Buscar"
+            className="search"
+            onChange={handleFiltro}
+          />
+        </div>
       </div>
 
       <div className="task-container">
@@ -67,6 +79,8 @@ const TodoList = () => {
             index={index}
             editarTareasArr={editarTareasArr}
             eliminarTarea={eliminarTarea}
+            render={render}
+            setRender={setRender}
           />
         ))}
       </div>

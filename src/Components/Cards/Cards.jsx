@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Cards.css";
 import Editar from "../Editar/Editar.jsx";
 
-const Cards = ({ list, index, eliminarTarea, editarTareasArr }) => {
+const Cards = ({
+  list,
+  index,
+  eliminarTarea,
+  editarTareasArr,
+  setRender,
+  render,
+}) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -37,22 +44,49 @@ const Cards = ({ list, index, eliminarTarea, editarTareasArr }) => {
     eliminarTarea(index);
   };
 
+  const handleCambio = (tarea, index) => {
+    const db = JSON.parse(localStorage.getItem("listaTareas"));
+    if (tarea.Homework) {
+      db[index] = {
+        Name: tarea.Name,
+        Descripcion: tarea.Descripcion,
+        Homework: false,
+      };
+      localStorage.setItem("listaTareas", JSON.stringify(db));
+      setRender(!render);
+    } else {
+      db[index] = {
+        Name: tarea.Name,
+        Descripcion: tarea.Descripcion,
+        Homework: true,
+      };
+      localStorage.setItem("listaTareas", JSON.stringify(db));
+      setRender(!render);
+    }
+  };
   return (
-    <div class="card-wrapper mr-5">
+    <div className="card-wrapper mr-5">
       <div
         className="card-top"
-        style={{ "background-color": colors[index % 5].primaryColor }}
+        style={{ backgroundColor: colors[index % 5].primaryColor }}
       ></div>
       <div className="task-holder">
         <span
           className="card-header"
-          style={{ "background-color": colors[index % 5].secondaryColor }}
+          style={{ backgroundColor: colors[index % 5].secondaryColor }}
         >
           {list.Name}
         </span>
         <p className="mt-3">{list.Descripcion}</p>
 
         <div className="option">
+          <button
+            className="btn "
+            onClick={() => handleCambio(list, index)}
+            style={{ backgroundColor: colors[index % 5].primaryColor }}
+          >
+            {list.Homework ? "Pendiente" : "Realizada"}
+          </button>
           <i
             className="far fa-edit ms-1 "
             style={{ color: colors[index % 5].primaryColor }}

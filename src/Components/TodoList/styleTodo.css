@@ -1,6 +1,29 @@
+/* Titulo */
+.primaryTitle {
+  font-family: "Open Sans", sans-serif;
+}
+
 .header {
   height: 300px;
   width: 100%;
   background-color: #e9eef6;
   padding-top: 50px;
+}
+
+/* Button Crear */
+.crear {
+  width: 15%;
+  background-color: #e6874e !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Busqueda */
+.search {
+  width: 15%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #e6874e;
+  outline: none;
 }

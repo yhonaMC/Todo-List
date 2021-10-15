@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./styleTodo.css";
 import ModalTarea from "../Modal/Modal";
 import Cards from "../Cards/Cards";
+import { Input } from "reactstrap";
 
 const TodoList = () => {
   const [modal, setModal] = useState(false);
   const [taskList, setTaskList] = useState([]);
+  const [busqueda, setbusqueda] = useState("");
 
   const toggle = () => setModal(!modal);
 
@@ -37,9 +39,15 @@ const TodoList = () => {
     let arr = localStorage.getItem("listaTareas");
     if (arr) {
       let obj = JSON.parse(arr);
-      setTaskList(obj);
+      setTaskList(
+        obj.filter((res) => res.Descripcion.toLowerCase().includes(busqueda))
+      );
     }
-  }, []);
+  }, [busqueda]);
+
+  const handleFiltro = (e) => {
+    setbusqueda(e.target.value);
+  };
 
   return (
     <>
@@ -48,7 +56,9 @@ const TodoList = () => {
         <button className="btn btn-primary mt-3" onClick={() => setModal(true)}>
           Crear nueva Tarea
         </button>
+        <input type="text" placeholder="Buscar" onChange={handleFiltro} />
       </div>
+
       <div className="task-container">
         {taskList.map((obj, index) => (
           <Cards

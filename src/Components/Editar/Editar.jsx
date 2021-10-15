@@ -21,7 +21,7 @@ const Editar = ({ modal, toggle, editarTarea, list }) => {
     let taskObj = {};
     taskObj["Name"] = taskname;
     taskObj["Descripcion"] = descripcion;
-    taskObj["Homework"] = "pendiente";
+    taskObj["Homework"] = false;
     editarTarea(taskObj);
   };
 
@@ -56,7 +56,6 @@ const Editar = ({ modal, toggle, editarTarea, list }) => {
                 onChange={handleOnchange}
               ></textarea>
             </div>
-            <button className="btn btn-primary">{list.Homework}</button>
           </form>
         </ModalBody>
         <ModalFooter>

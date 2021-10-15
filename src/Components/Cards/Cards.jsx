@@ -51,16 +51,16 @@ const Cards = ({ list, index, eliminarTarea, editarTareasArr }) => {
           {list.Name}
         </span>
         <p className="mt-3">{list.Descripcion}</p>
-        <button className="btn btn-primary">{list.Homework}</button>
+
         <div className="option">
           <i
-            className="far fa-edit "
+            className="far fa-edit ms-1 "
             style={{ color: colors[index % 5].primaryColor }}
             onClick={() => setModal(true)}
           ></i>
 
           <i
-            className="far fa-trash-alt ms-1"
+            className="far fa-trash-alt ms-1  "
             style={{ color: colors[index % 5].primaryColor }}
             onClick={handleDelete}
           ></i>

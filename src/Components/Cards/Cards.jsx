@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Cards.css";
+import Editar from "../Editar/Editar.jsx";
 
-const Cards = ({ list, index, eliminarTarea }) => {
+const Cards = ({ list, index, eliminarTarea, editarTareasArr }) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const editarTarea = (obj) => {
+    editarTareasArr(obj, index);
+  };
+
   const colors = [
     {
       primaryColor: "#5D93E1",
@@ -43,11 +51,14 @@ const Cards = ({ list, index, eliminarTarea }) => {
           {list.Name}
         </span>
         <p className="mt-3">{list.Descripcion}</p>
+        <button className="btn btn-primary">{list.Homework}</button>
         <div className="option">
           <i
             className="far fa-edit "
             style={{ color: colors[index % 5].primaryColor }}
+            onClick={() => setModal(true)}
           ></i>
+
           <i
             className="far fa-trash-alt ms-1"
             style={{ color: colors[index % 5].primaryColor }}
@@ -55,6 +66,12 @@ const Cards = ({ list, index, eliminarTarea }) => {
           ></i>
         </div>
       </div>
+      <Editar
+        modal={modal}
+        toggle={toggle}
+        editarTarea={editarTarea}
+        list={list}
+      />
     </div>
   );
 };

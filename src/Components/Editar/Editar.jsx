@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "./modal.css";
+import React, { useState, useEffect } from "react";
+import "../Modal/modal.css";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-const ModalTarea = ({ modal, toggle, guardarTarea }) => {
+const Editar = ({ modal, toggle, editarTarea, list }) => {
   const [taskname, setTaskname] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
@@ -16,18 +16,24 @@ const ModalTarea = ({ modal, toggle, guardarTarea }) => {
     }
   };
 
-  const handleguardar = () => {
+  const handleEditar = (e) => {
+    e.preventDefault();
     let taskObj = {};
     taskObj["Name"] = taskname;
     taskObj["Descripcion"] = descripcion;
     taskObj["Homework"] = "pendiente";
-    guardarTarea(taskObj);
+    editarTarea(taskObj);
   };
+
+  useEffect(() => {
+    setTaskname(list.Name);
+    setDescripcion(list.Descripcion);
+  }, []);
 
   return (
     <>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Crear Nueva Tarea</ModalHeader>
+        <ModalHeader toggle={toggle}>Editar Tarea</ModalHeader>
         <ModalBody>
           <form>
             <div className="form-group">
@@ -50,11 +56,12 @@ const ModalTarea = ({ modal, toggle, guardarTarea }) => {
                 onChange={handleOnchange}
               ></textarea>
             </div>
+            <button className="btn btn-primary">{list.Homework}</button>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleguardar}>
-            Guardar
+          <Button color="primary" onClick={handleEditar}>
+            Editar
           </Button>{" "}
           <Button color="secondary" onClick={toggle}>
             Cancelar
@@ -65,4 +72,4 @@ const ModalTarea = ({ modal, toggle, guardarTarea }) => {
   );
 };
 
-export default ModalTarea;
+export default Editar;

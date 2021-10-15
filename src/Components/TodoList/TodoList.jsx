@@ -17,6 +17,14 @@ const TodoList = () => {
     setModal(false);
   };
 
+  const editarTareasArr = (obj, index) => {
+    let list = taskList;
+    list[index] = obj;
+    localStorage.setItem("listaTareas", JSON.stringify(list));
+    setTaskList(list);
+    window.location.reload();
+  };
+
   const eliminarTarea = (index) => {
     let eliminar = taskList;
     eliminar.splice(index, 1);
@@ -44,9 +52,10 @@ const TodoList = () => {
       <div className="task-container">
         {taskList.map((obj, index) => (
           <Cards
-            key={obj.id}
+            key={index}
             list={obj}
             index={index}
+            editarTareasArr={editarTareasArr}
             eliminarTarea={eliminarTarea}
           />
         ))}

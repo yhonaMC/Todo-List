@@ -2,7 +2,7 @@
 ### Instrucciones
 
 - Clonar Repositorio
-- Instalar dependencias con npm-insstall
+- Instalar dependencias con npm-install
 - para arracar el proyecto con npm-start
 
 

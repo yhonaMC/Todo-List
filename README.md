@@ -8,8 +8,8 @@
 
 ### Dependencias Instaladas
 -Reactstrap
-- Boopstrap
-- 
+-Boopstrap
+
 ### Deployment
 
 https://angry-kirch-e09267.netlify.app
